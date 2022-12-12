@@ -1,0 +1,18 @@
+.table {
+    border: 2px solid black;
+    padding: 40px;
+    box-shadow: inset;
+    margin-top: 20px;
+}
+
+.title {
+    position: absolute;
+    height: 6px;
+    top: 100px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #2569A5;
+}
