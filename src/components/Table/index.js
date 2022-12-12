@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Table from 'react-bootstrap/Table';
 import axios from "axios";
 import './table.css'
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, FormControl } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -14,7 +14,7 @@ const TableData = () => {
 
 
     const getCoinPaprika = async () => {
-        return await axios.get('https://api.coinpaprika.com/v1/coins/?_per=[10]')
+        return await axios.get('https://api.coinpaprika.com/v1/coins')
             .then((res) => setData(res.data))
             .catch((err) => console.log(err))
     }
@@ -25,13 +25,14 @@ const TableData = () => {
 
     const handleSearch = async (e) => {
         e.preventDefault();
-        return await axios.get('https://api.coinpaprika.com/v1/coins/?_per=[10]_q=[value]')
+        return await axios.get(`https://api.coinpaprika.com/v1/coins?q=${value}`)
             .then((res) => {
                 setData(res.data)
                 setValue("")
             })
             .catch((err) => console.log(err))
     }
+
 
     return (
         <>
@@ -40,11 +41,9 @@ const TableData = () => {
                     <div className='mx-2'>
                         <h1 className="mx-5 title">Coin List</h1>
                     </div>
-                    <Form className='d-flex mt-5 ' onSubmit={handleSearch}>
-                        <Form.Group className="p-2">
-                            <Form.Control type="text" placeholder="Search" value={value} onChange={(e) => setValue(e.target.value)} />
-                        </Form.Group>
-                        <Button variant="warning" type="submit">
+                    <Form style={{ padding: "15px", maxWidth: "400px", alignContent: "center", borderRadius: "20px" }} className="d-flex input-group w-auto" onSubmit={handleSearch}>
+                        <FormControl type="text" placeholder="Search" value={value} onChange={(e) => setValue(e.target.value)} />
+                        <Button className="text-dark bg-primary mx-2" type="submit">
                             Search
                         </Button>
                     </Form >
@@ -77,7 +76,7 @@ const TableData = () => {
                             </tr>
                         </tbody>
                     ) : (
-                        data && data.slice(0, 10).map((coin, i) => (
+                            data.slice(0, 10).map((coin, i) => (
                             <tbody>
                                 <tr>
                                     <th scope="row">{i + 1}</th>
