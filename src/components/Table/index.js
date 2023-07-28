@@ -46,6 +46,7 @@ const TableData = () => {
         setSearchTerm('');
     }
     
+    // pagination
     const indexOfLastItem = currentPage * itemPerPage;
     const indexOfFirstItem = indexOfLastItem - itemPerPage;
     const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
